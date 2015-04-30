@@ -1,0 +1,13 @@
+en:
+  routes:
+nl:
+  routes:
+    admin: beheer
+    secret: geheim
+    customers: klanten
+    payments: betalingen
+    products: producten
+    new: nieuw
+    edit: wijzigen
+    account: profiel
+
