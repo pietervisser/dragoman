@@ -55,6 +55,10 @@ describe 'routes' do
     expect(empty_books_en_path).to eq '/books'
   end
 
+  it 'looks up translations by the path option if present' do
+    expect(edit_invitation_nl_path(2)).to eq '/uitnodigingen/2/accepteren'
+  end
+
   describe 'adds untranslated path helpers' do
     it 'uses the I18n locale' do
       I18n.locale = :nl
@@ -64,7 +68,6 @@ describe 'routes' do
 
   describe 'adds untranslated url helpers' do
     it 'uses the I18n locale' do
-      print_routes
       I18n.locale = :nl
       expect(payments_url).to eq 'http://example.com/geheim/betalingen'
     end

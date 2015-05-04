@@ -10,7 +10,7 @@ Dummy::Application.routes.draw do
       get 'payments' => 'application#index'
     end
 
-    resources :products
+    resources :products#, path_names: {edit: 'accept'}
     resource :account
 
     get '' => 'application#index', as: 'empty'
@@ -18,6 +18,12 @@ Dummy::Application.routes.draw do
     namespace 'empty', path: '' do
       get 'books' => 'application#index'
     end
+    resources :invitations, only: [] do
+      member do
+        get :edit, path: 'accept'
+      end
+    end
+
   end
 
 end
