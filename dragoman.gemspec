@@ -6,11 +6,10 @@ require 'dragoman/version'
 Gem::Specification.new do |spec|
   spec.name          = "dragoman"
   spec.version       = Dragoman::VERSION
-  spec.authors       = ["Pieter Visser"]
-  spec.email         = ["pieter@pietervisser.nl"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.authors       = ["Pieter Visser", "Robert Jan de Gelder"]
+  spec.email         = ["info@greenonline.nl"]
+  spec.summary       = %q{Simple Rails Routes Translator}
+  spec.homepage      = "http://github.com/pietervisser/dragoman"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
