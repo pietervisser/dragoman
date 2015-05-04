@@ -41,8 +41,8 @@ describe 'routes' do
   end
 
   it 'sets the correct locale' do
-    assert_routing '/producten', :controller => 'products', :action => 'index', :locale => 'nl'
-    assert_routing '/products', :controller => 'products', :action => 'index', :locale => 'en'
+    assert_routing '/producten', :controller => 'products', :action => 'index', :locale => :nl
+    assert_routing '/products', :controller => 'products', :action => 'index', :locale => :en
   end
 
   describe 'adds untranslated path helpers' do
@@ -54,20 +54,23 @@ describe 'routes' do
 
   describe 'adds untranslated url helpers' do
     it 'uses the I18n locale' do
+      print_routes
       I18n.locale = :nl
       expect(payments_url).to eq 'http://example.com/geheim/betalingen'
     end
-  end
-
-  it 'clears untranslated helpers when the routes are cleared' do
-    pending "should clean the generated helpers on routes.clear"
   end
 
 end
 
 def print_routes
   all_routes = Rails.application.routes.routes
-  require 'action_dispatch/routing/inspector'
-  inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
-  puts '', inspector.format(ActionDispatch::Routing::ConsoleFormatter.new, ENV['CONTROLLER'])
+  if Rails::VERSION::MAJOR >= 4
+    require 'action_dispatch/routing/inspector'
+    inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
+    puts '', inspector.format(ActionDispatch::Routing::ConsoleFormatter.new, ENV['CONTROLLER'])
+  else
+    require 'rails/application/route_inspector'
+    inspector = Rails::Application::RouteInspector.new
+    puts inspector.format(all_routes, ENV['CONTROLLER']).join "\n"
+  end
 end

@@ -1,24 +1,10 @@
 module Dragoman
   module Mapper
 
-    def self.included(base)
-      base.send :alias_method_chain, :add_route, :localization
-      base.send :alias_method_chain, :scope, :localization
-
-      base.send :alias_method_chain, :resources, :localization
-      base::Mapping.extend Mapping
-      base::Mapping.class_eval do
-        class << self
-          alias_method_chain :build, :localization
-        end
-      end
-
-    end
-
     module Mapping
       def build_with_localization scope, set, path, as, options
         if options[:locale]
-          Dragoman::UrlHelpers.add_untranslated_helpers as, set if as
+          Dragoman::UrlHelpers.add_untranslated_helpers as, set.named_routes.path_helpers_module, set.named_routes.url_helpers_module if as
           as = "#{as}_#{options[:locale]}" if as.present?
           as = nil if as && set.named_routes.routes[as.to_sym] # TODO: why do we need to set as to nil?
         end
@@ -30,7 +16,7 @@ module Dragoman
 
     def localize
       @current_locale = nil
-      locales = ['nl', 'en']
+      locales = I18n.available_locales
       locales.each do |locale|
         @current_locale = locale
         yield

@@ -1,5 +1,5 @@
 module Dragoman
-  class TranslationVisitor < ActionDispatch::Journey::Visitors::String
+  class TranslationVisitor < Dragoman::Journey::Visitors::String
 
     def initialize locale
       @locale = locale

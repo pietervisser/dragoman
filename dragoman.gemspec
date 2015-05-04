@@ -18,8 +18,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency("activesupport", ">= 3.1.0")
-  spec.add_development_dependency("rails", ">= 4.1.0")
   spec.add_development_dependency("rspec-rails")
   spec.add_development_dependency("guard-rspec")
 end
