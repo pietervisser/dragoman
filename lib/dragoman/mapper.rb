@@ -47,7 +47,7 @@ module Dragoman
     def resources_with_localization(*resources, &block)
       options = resources.extract_options!.dup
       if @current_locale
-        options[:path] = Dragoman::Translator.translate_path(resources.last, @current_locale)
+        options[:path] = Dragoman::Translator.translate_path(options[:path] || resources.last, @current_locale)
       end
       resources_without_localization(*resources, options, &block)
     end

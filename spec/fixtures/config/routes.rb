@@ -24,6 +24,8 @@ Dummy::Application.routes.draw do
       end
     end
 
+    resources :chairs, only: :index, path: 'seats'
+
   end
 
 end

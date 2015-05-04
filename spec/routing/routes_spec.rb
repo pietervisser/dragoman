@@ -59,6 +59,11 @@ describe 'routes' do
     expect(edit_invitation_nl_path(2)).to eq '/uitnodigingen/2/accepteren'
   end
 
+  it 'looks up resources translations by the path option if present' do
+    expect(chairs_nl_path).to eq '/stoelen'
+    expect(chairs_en_path).to eq '/seats'
+  end
+
   describe 'adds untranslated path helpers' do
     it 'uses the I18n locale' do
       I18n.locale = :nl
