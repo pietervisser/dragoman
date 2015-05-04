@@ -45,6 +45,11 @@ describe 'routes' do
     assert_routing '/products', :controller => 'products', :action => 'index', :locale => :en
   end
 
+  it 'skips empty paths' do
+    expect(empty_nl_path).to eq '/'
+    expect(empty_en_path).to eq '/'
+  end
+
   describe 'adds untranslated path helpers' do
     it 'uses the I18n locale' do
       I18n.locale = :nl

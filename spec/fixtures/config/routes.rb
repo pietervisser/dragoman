@@ -12,6 +12,8 @@ Dummy::Application.routes.draw do
 
     resources :products
     resource :account
+
+    get '' => 'application#test', as: 'empty'
   end
 
 end
