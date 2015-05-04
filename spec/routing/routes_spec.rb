@@ -50,6 +50,11 @@ describe 'routes' do
     expect(empty_en_path).to eq '/'
   end
 
+  it 'skips empty scopes' do
+    expect(empty_books_nl_path).to eq '/boeken'
+    expect(empty_books_en_path).to eq '/books'
+  end
+
   describe 'adds untranslated path helpers' do
     it 'uses the I18n locale' do
       I18n.locale = :nl

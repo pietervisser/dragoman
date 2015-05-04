@@ -13,7 +13,11 @@ Dummy::Application.routes.draw do
     resources :products
     resource :account
 
-    get '' => 'application#test', as: 'empty'
+    get '' => 'application#index', as: 'empty'
+
+    namespace 'empty', path: '' do
+      get 'books' => 'application#index'
+    end
   end
 
 end

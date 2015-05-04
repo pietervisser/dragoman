@@ -26,7 +26,7 @@ module Dragoman
 
     def add_route_with_localization(action, options)
       if @current_locale
-        options[:path] = Dragoman::Translator.translate_path(action, @current_locale) if action.present? && !canonical_action?(action)
+        options[:path] = Dragoman::Translator.translate_path(action, @current_locale) unless canonical_action?(action)
         options[:locale] = @current_locale
       end
       add_route_without_localization action, options
