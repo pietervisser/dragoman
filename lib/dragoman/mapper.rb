@@ -18,7 +18,7 @@ module Dragoman
       @current_locale = nil
       locales = I18n.available_locales
       locales.each do |locale|
-        @current_locale = locale
+        @current_locale = locale.to_s
         yield
       end
       @current_locale = nil

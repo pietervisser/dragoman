@@ -41,8 +41,8 @@ describe 'routes' do
   end
 
   it 'sets the correct locale' do
-    assert_routing '/producten', :controller => 'products', :action => 'index', :locale => :nl
-    assert_routing '/products', :controller => 'products', :action => 'index', :locale => :en
+    assert_routing '/producten', :controller => 'products', :action => 'index', :locale => 'nl'
+    assert_routing '/products', :controller => 'products', :action => 'index', :locale => 'en'
   end
 
   it 'skips empty paths' do
