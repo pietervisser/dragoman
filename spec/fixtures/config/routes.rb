@@ -32,6 +32,10 @@ Dummy::Application.routes.draw do
         resources :drivers, :only => [:show], shallow: true
       end
     end
+
+    # route with blank translation
+    get 'music' => 'application#index'
+
   end
 
 end

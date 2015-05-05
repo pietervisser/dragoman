@@ -69,6 +69,10 @@ describe 'routes' do
     expect(driver_en_path(3)).to eq '/fast/drivers/3'
   end
 
+  it 'skips blank translations' do
+    expect(music_nl_path).to eq '/music'
+  end
+
   describe 'adds untranslated path helpers' do
     it 'uses the I18n locale' do
       I18n.locale = :nl

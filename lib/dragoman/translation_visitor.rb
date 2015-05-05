@@ -7,7 +7,8 @@ module Dragoman
     end
 
     def visit_LITERAL node
-      I18n.t node, scope: :routes, default: node.to_s, locale: @locale
+      translation = I18n.t node, scope: :routes, default: node.to_s, locale: @locale
+      translation.present? ? translation : node
     end
 
   end
