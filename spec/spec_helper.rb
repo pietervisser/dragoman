@@ -20,7 +20,6 @@ RSpec.configure do |config|
 
   config.after(:each) do
     I18n.locale = I18n.default_locale = :en
-    # Rails.application.reload_routes!
   end
 
 end
