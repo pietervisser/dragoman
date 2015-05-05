@@ -26,6 +26,12 @@ Dummy::Application.routes.draw do
 
     resources :chairs, only: :index, path: 'seats'
 
+    # shallow routes
+    scope 'fast', shallow_path: 'fast' do
+      resources :cars, :only => [:index] do
+        resources :drivers, :only => [:show], shallow: true
+      end
+    end
   end
 
 end

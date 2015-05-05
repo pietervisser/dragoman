@@ -64,6 +64,11 @@ describe 'routes' do
     expect(chairs_en_path).to eq '/seats'
   end
 
+  it 'translated shallow paths' do
+    expect(driver_nl_path(3)).to eq '/snelle/bestuurders/3'
+    expect(driver_en_path(3)).to eq '/fast/drivers/3'
+  end
+
   describe 'adds untranslated path helpers' do
     it 'uses the I18n locale' do
       I18n.locale = :nl

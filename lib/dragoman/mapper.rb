@@ -37,6 +37,7 @@ module Dragoman
         options = args.extract_options!.dup
         if options[:path] || args.any?
           options[:path] = Dragoman::Translator.translate_path(options[:path] || args.flatten.join('/'), @current_locale)
+          options[:shallow_path] = Dragoman::Translator.translate_path(options[:shallow_path], @current_locale) if options[:shallow_path]
         end
         scope_without_localization options, &block
       else
