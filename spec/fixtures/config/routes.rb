@@ -36,6 +36,9 @@ Dummy::Application.routes.draw do
     # route with blank translation
     get 'music' => 'application#index'
 
+    # route without translation
+    get 'sounds' => 'application#index'
+
   end
 
 end
