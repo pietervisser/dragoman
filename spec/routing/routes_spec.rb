@@ -41,8 +41,11 @@ describe 'routes' do
   end
 
   it 'sets the correct locale' do
-    assert_routing '/producten', :controller => 'products', :action => 'index', :locale => 'nl'
-    assert_routing '/products', :controller => 'products', :action => 'index', :locale => 'en'
+    expect(get: '/producten').to route_to(controller: 'products', action: 'index')
+    expect(get: '/products').to route_to(controller: 'products', action: 'index')
+    expect(get: '/nl/producten').to route_to(controller: 'products', action: 'index', locale: 'nl')
+    expect(get: '/en/products').to route_to(controller: 'products', action: 'index', locale: 'en')
+    expect(get: '/en/producten').not_to be_routable
   end
 
   it 'skips empty paths' do
@@ -79,8 +82,8 @@ describe 'routes' do
   end
 
   it 'translates routes in the original order as specified in routes.rb' do
-    expect(get: 'votes/positive').to route_to(action: 'positive', controller: 'votes', locale: 'en')
-    expect(get: 'votes/positief').to route_to(action: 'positive', controller: 'votes', locale: 'nl') # should use 'positive' action instead of 'show'
+    expect(get: 'votes/positive').to route_to(action: 'positive', controller: 'votes')
+    expect(get: 'votes/positief').to route_to(action: 'positive', controller: 'votes') # should use 'positive' action instead of 'show'
   end
 
   describe 'adds untranslated path helpers' do
