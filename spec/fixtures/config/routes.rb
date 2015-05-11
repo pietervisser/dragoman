@@ -39,6 +39,12 @@ Dummy::Application.routes.draw do
     # route without translation
     get 'sounds' => 'application#index'
 
+    resources :votes, only: :show do
+      collection do
+        get 'positive'
+      end
+    end
+
   end
 
 end

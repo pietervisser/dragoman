@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-class ProductsController < ApplicationController
-end
+class ProductsController < ApplicationController; end
+class VotesController < ApplicationController; end
 
 describe 'routes' do
 
@@ -15,10 +15,10 @@ describe 'routes' do
   it 'translates resources' do
     expect(products_en_path).to eq '/products'
     expect(new_product_en_path).to eq '/products/new'
-    expect(edit_product_en_path(1)).to eq '/products/1/edit'
+    expect(edit_product_en_path(id: 1)).to eq '/products/1/edit'
     expect(products_nl_path).to eq '/producten'
     expect(new_product_nl_path).to eq '/producten/nieuw'
-    expect(edit_product_nl_path(1)).to eq '/producten/1/wijzigen'
+    expect(edit_product_nl_path(id: 1)).to eq '/producten/1/wijzigen'
   end
 
   it 'translates resource' do
@@ -41,8 +41,11 @@ describe 'routes' do
   end
 
   it 'sets the correct locale' do
-    assert_routing '/producten', :controller => 'products', :action => 'index', :locale => 'nl'
-    assert_routing '/products', :controller => 'products', :action => 'index', :locale => 'en'
+    expect(get: '/producten').to route_to(controller: 'products', action: 'index')
+    expect(get: '/products').to route_to(controller: 'products', action: 'index')
+    expect(get: '/nl/producten').to route_to(controller: 'products', action: 'index', locale: 'nl')
+    expect(get: '/en/products').to route_to(controller: 'products', action: 'index', locale: 'en')
+    expect(get: '/en/producten').not_to be_routable
   end
 
   it 'skips empty paths' do
@@ -56,7 +59,7 @@ describe 'routes' do
   end
 
   it 'looks up translations by the path option if present' do
-    expect(edit_invitation_nl_path(2)).to eq '/uitnodigingen/2/accepteren'
+    expect(edit_invitation_nl_path(id: 2)).to eq '/uitnodigingen/2/accepteren'
   end
 
   it 'looks up resources translations by the path option if present' do
@@ -65,8 +68,8 @@ describe 'routes' do
   end
 
   it 'translated shallow paths' do
-    expect(driver_nl_path(3)).to eq '/snelle/bestuurders/3'
-    expect(driver_en_path(3)).to eq '/fast/drivers/3'
+    expect(driver_nl_path(id: 3)).to eq '/snelle/bestuurders/3'
+    expect(driver_en_path(id: 3)).to eq '/fast/drivers/3'
   end
 
   it 'skips blank translations' do
@@ -76,6 +79,11 @@ describe 'routes' do
   it 'uses the default path if no translation is present' do
     expect(sounds_en_path).to eq '/glitches'
     expect(sounds_nl_path).to eq '/sounds'
+  end
+
+  it 'translates routes in the original order as specified in routes.rb' do
+    expect(get: 'votes/positive').to route_to(action: 'positive', controller: 'votes')
+    expect(get: 'votes/positief').to route_to(action: 'positive', controller: 'votes') # should use 'positive' action instead of 'show'
   end
 
   describe 'adds untranslated path helpers' do
