@@ -67,9 +67,10 @@ describe 'routes' do
     expect(chairs_en_path).to eq '/seats'
   end
 
-  it 'translated shallow paths' do
+  it 'translates shallow paths' do
     expect(driver_nl_path(id: 3)).to eq '/snelle/bestuurders/3'
     expect(driver_en_path(id: 3)).to eq '/fast/drivers/3'
+    expect(driver_en_path(id: 3, locale: 'en')).to eq '/en/fast/drivers/3'
   end
 
   it 'skips blank translations' do
