@@ -13,6 +13,7 @@ module Dragoman
         dragoman_options[:locales].each do |locale|
           new_conditions = conditions.dup
           new_requirements = requirements.dup
+          new_defaults = defaults.dup
 
           new_name = name ? "#{name}_#{locale}" : nil
           new_name = nil if new_name && named_routes.routes[new_name.to_sym] # Why is this necessary
@@ -23,7 +24,8 @@ module Dragoman
             new_conditions[:parsed_path_info] = Dragoman::Journey::Parser.new.parse new_path if new_conditions[:parsed_path_info]
           end
           new_requirements[:locale] = locale
-          add_route_without_localization app, new_conditions, new_requirements, defaults.dup, new_name, anchor
+          new_defaults[:locale] = locale
+          add_route_without_localization app, new_conditions, new_requirements, new_defaults, new_name, anchor
         end
       else
         add_route_without_localization app, conditions, requirements, defaults, name, anchor
