@@ -23,7 +23,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    I18n.locale = I18n.default_locale = :en
+    I18n.locale = I18n.default_locale = :nl
   end
 
 end

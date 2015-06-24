@@ -14,6 +14,7 @@ module Dummy
     config.paths["config/locales"] = ["spec/fixtures/locales/routes.yml"]
     config.eager_load = false
     config.i18n.fallbacks = true
+    config.i18n.default_locale = :nl
 
     if Dummy.rails4?
       config.paths["config/routes.rb"] = ["spec/fixtures/config/routes.rb"]

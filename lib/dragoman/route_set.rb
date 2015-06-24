@@ -23,8 +23,8 @@ module Dragoman
             new_conditions[:path_info] = new_path
             new_conditions[:parsed_path_info] = Dragoman::Journey::Parser.new.parse new_path if new_conditions[:parsed_path_info]
           end
-          new_requirements[:locale] = locale
-          new_defaults[:locale] = locale
+          new_requirements[:locale] = locale.to_s
+          new_defaults[:locale] = locale.to_s
           add_route_without_localization app, new_conditions, new_requirements, new_defaults, new_name, anchor
         end
       else
